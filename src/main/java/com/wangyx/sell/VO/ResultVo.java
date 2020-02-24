@@ -1,5 +1,6 @@
 package com.wangyx.sell.VO;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 /**
@@ -9,6 +10,7 @@ import lombok.Data;
  * @Version 1.0
  */
 @Data
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResultVo<T> {
 
     /**错误码*/
