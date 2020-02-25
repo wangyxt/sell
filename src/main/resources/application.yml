@@ -24,6 +24,15 @@ server:
 
 
 wechat:
-  mpAppId: wx4b0594326d23c9e2
+  # 公众账号，授权
+  mpAppId: wxd898fcb01713c658
   mpAppSecret: a932a6bb93bc8a229d50c566984e53b6
-
+  #开放平台，卖家扫码登录用
+  openAppId: 
+  openAppSecret:
+  #支付/商户号
+  mchId: 1483469312
+  mchKey: 098F6BCD4621D373CADE4E832627B4F6
+  # 发起支付不需要证书，退款需要
+  keyPath:
+  notifyUrl: http://wyxsell.natapp1.cc/sell/pay/notify
