@@ -21,6 +21,7 @@ public enum ResultEnum {
     PAY_STATUS_ERROR(777,"支付状态不正确"),
     CART_EMPTY(888,"购物车为空"),
     ORDER_OWNER_ERROR(999,"该订单不属于当前用户"),
+    WECHAT_MP_ERROR(22,"微信公众账号方面错误"),
     ;
 
     private Integer code;

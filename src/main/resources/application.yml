@@ -19,4 +19,11 @@ spring:
 #  file: /var/log/tomcat/sell.log
 #  level: debug
 server:
+  port: 8080
   context-path: /sell
+
+
+wechat:
+  mpAppId: wx4b0594326d23c9e2
+  mpAppSecret: a932a6bb93bc8a229d50c566984e53b6
+
