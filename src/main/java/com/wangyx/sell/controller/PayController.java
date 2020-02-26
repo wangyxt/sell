@@ -6,18 +6,21 @@ import com.wangyx.sell.enums.ResultEnum;
 import com.wangyx.sell.exceptions.SellException;
 import com.wangyx.sell.service.OrderService;
 import com.wangyx.sell.service.PayService;
+import com.wangyx.sell.utils.JsonUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 @RequestMapping("/pay")
+@Slf4j
 public class PayController {
 
     @Autowired
@@ -28,7 +31,7 @@ public class PayController {
 
     @GetMapping("/create")
     public ModelAndView create(@RequestParam("orderId")String orderId,
-                               @RequestParam("returnUrl")String returnUrl) {
+                               @RequestParam("returnUrl")String returnUrl) throws UnsupportedEncodingException {
         //1.查询订单
         OrderDTO orderDTO = orderService.findOne(orderId);
         if (orderDTO == null) {
@@ -39,8 +42,16 @@ public class PayController {
 
         Map map = new HashMap<String,Object>();
         map.put("payResponse", payResponse);
-        map.put("returnUrl", returnUrl);
+        map.put("returnUrl", returnUrl.startsWith("http://") ? returnUrl : URLEncoder.encode(returnUrl, "utf-8"));
 
         return new ModelAndView("pay/create", map);
+    }
+
+    @PostMapping("/notify")
+    public ModelAndView notify(@RequestBody String notifyData){
+        PayResponse payResponse = payService.notify(notifyData);
+
+        //返回给微信结果
+        return new ModelAndView("pay/sucess");
     }
 }
