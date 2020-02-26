@@ -30,7 +30,7 @@ public class WechatController {
         //1.配置
         //2.调用方法
         String url = "http://wyxsell.natapp1.cc/sell/wechat/userInfo";
-        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_BASE, URLEncoder.encode(returnUrl));
+        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, URLEncoder.encode(returnUrl));
         log.info("【微信网页授权】获取code，result={}",redirectUrl);
         return "redirect:" + redirectUrl;
     }
