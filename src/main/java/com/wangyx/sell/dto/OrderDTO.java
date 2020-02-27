@@ -1,10 +1,12 @@
 package com.wangyx.sell.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.wangyx.sell.entity.OrderDetailEntity;
 import com.wangyx.sell.enums.OrderStatusEnum;
 import com.wangyx.sell.enums.PayStatusEnum;
+import com.wangyx.sell.utils.EnumUtil;
 import com.wangyx.sell.utils.serializer.Date2LongSerializer;
 import lombok.Data;
 
@@ -37,4 +39,14 @@ public class OrderDTO {
     private Date updateTime;
 
     List<OrderDetailEntity> orderDetailList;
+
+    @JsonIgnore
+    public OrderStatusEnum getOrderStatusEnum(){
+        return EnumUtil.getByCode(orderStatus,OrderStatusEnum.class);
+    }
+
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum(){
+        return EnumUtil.getByCode(payStatus,PayStatusEnum.class);
+    }
 }

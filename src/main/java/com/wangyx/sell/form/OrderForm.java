@@ -27,7 +27,7 @@ public class OrderForm {
     /**
      * 买家openid
      */
-    @NotEmpty(message = "openid必填")
+//    @NotEmpty(message = "openid必填")
     private String openid;
 
     /**

@@ -3,8 +3,8 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://192.168.22.176/sell?characterEncoding=utf-8&useSSL=false
-#    url: jdbc:mysql://192.168.199.120/sell?characterEncoding=utf-8&useSSL=false
+#    url: jdbc:mysql://192.168.22.176/sell?characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://192.168.199.120/sell?characterEncoding=utf-8&useSSL=false
   jpa:
     properties:
       hibernate:
@@ -37,5 +37,5 @@ wechat:
   mchId: 1483469312
   mchKey: 098F6BCD4621D373CADE4E832627B4F6
   # 发起支付不需要证书，退款需要
-  keyPath:
+  keyPath: D:/h5.p12
   notifyUrl: http://wyxsell.natapp1.cc/sell/pay/notify

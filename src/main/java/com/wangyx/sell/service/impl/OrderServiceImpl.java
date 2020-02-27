@@ -13,6 +13,7 @@ import com.wangyx.sell.exceptions.SellException;
 import com.wangyx.sell.repository.OrderDetailRepository;
 import com.wangyx.sell.repository.OrderMasterRepository;
 import com.wangyx.sell.service.OrderService;
+import com.wangyx.sell.service.PayService;
 import com.wangyx.sell.service.ProductService;
 import com.wangyx.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -49,6 +50,9 @@ public class OrderServiceImpl implements OrderService {
     
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private PayService payService;
     
     @Override
     @Transactional(rollbackOn = Exception.class)
@@ -142,7 +146,7 @@ public class OrderServiceImpl implements OrderService {
         productService.increaseStock(cartDTOList);
         //如果已支付，需要退款
         if (orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())){
-            //TODO
+            payService.refund(orderDTO);
         }
         return orderDTO;
     }
@@ -191,5 +195,12 @@ public class OrderServiceImpl implements OrderService {
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
         return orderDTO;
+    }
+
+    @Override
+    public Page<OrderDTO> findList(Pageable pageable) {
+        Page<OrderMasterEntity> orderMasterPage = orderMasterRepository.findAll(pageable);
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
+        return new PageImpl<>(orderDTOList,pageable,orderMasterPage.getTotalElements());
     }
 }
