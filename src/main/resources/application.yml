@@ -4,8 +4,8 @@ spring:
     username: root
     password: 123456
 #    url: jdbc:mysql://49.235.198.29/sell?characterEncoding=utf-8&useSSL=false
-    url: jdbc:mysql://192.168.22.176/sell?characterEncoding=utf-8&useSSL=false
-#    url: jdbc:mysql://192.168.199.120/sell?characterEncoding=utf-8&useSSL=false
+#    url: jdbc:mysql://192.168.22.176/sell?characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://192.168.199.120/sell?characterEncoding=utf-8&useSSL=false
   jpa:
     properties:
       hibernate:
@@ -42,10 +42,10 @@ server:
 
 wechat:
   # 公众账号，授权
-  mpAppId: wxd898fcb01713c658
-  mpAppSecret: a932a6bb93bc8a229d50c566984e53b6
-#  mpAppId: wx4b0594326d23c9e2
+#  mpAppId: wxd898fcb01713c658
 #  mpAppSecret: a932a6bb93bc8a229d50c566984e53b6
+  mpAppId: wx4b0594326d23c9e2
+  mpAppSecret: a932a6bb93bc8a229d50c566984e53b6
   #开放平台，卖家扫码登录用
   openAppId: 
   openAppSecret:

@@ -16,7 +16,7 @@ public class BuyerServiceImpl implements BuyerService {
     @Autowired
     private OrderService orderService;
 
-    private static final String OPENID = "oTgZpwUWEZITJkqJs4s153yWOJ0M";
+//    private static final String OPENID = "oTgZpwUWEZITJkqJs4s153yWOJ0M";
 
     @Override
     public OrderDTO findOrderOne(String openid, String orderId) {
@@ -40,7 +40,7 @@ public class BuyerServiceImpl implements BuyerService {
             return null;
         }
         //判断是否是自己的订单
-        if (!orderDTO.getBuyerOpenid().equals(OPENID)){
+        if (!orderDTO.getBuyerOpenid().equals(openid)){
             log.error("【查询订单】订单的openid不一致，openid={}，orderDTO={}",openid,orderDTO);
             throw new SellException(ResultEnum.PARAM_ERROR);
         }

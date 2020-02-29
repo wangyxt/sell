@@ -37,7 +37,7 @@ public class BuyerOrderController {
     @Autowired
     private BuyerService buyerService;
 
-    private static final String OPENID = "oTgZpwUWEZITJkqJs4s153yWOJ0M";
+//    private static final String OPENID = "oTgZpwUWEZITJkqJs4s153yWOJ0M";
 
     //创建订单
     @PostMapping("/create")
@@ -48,7 +48,7 @@ public class BuyerOrderController {
             throw new SellException(ResultEnum.PARAM_ERROR.getCode(),
                     bindingResult.getFieldError().getDefaultMessage());
         }
-        orderForm.setOpenid(OPENID);
+//        orderForm.setOpenid(OPENID);
         OrderDTO orderDTO = OrderForm2OrderDTOConverter.convert(orderForm);
         if (CollectionUtils.isEmpty(orderDTO.getOrderDetailList())){
             log.error("【创建订单】购物车不能为空");
