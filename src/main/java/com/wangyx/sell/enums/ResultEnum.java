@@ -22,10 +22,11 @@ public enum ResultEnum {
     PAY_STATUS_ERROR(777,"支付状态不正确"),
     CART_EMPTY(888,"购物车为空"),
     ORDER_OWNER_ERROR(999,"该订单不属于当前用户"),
-    WECHAT_MP_ERROR(22,"微信公众账号方面错误"),
-    WXPAY_NOTIFY_MONEY_VERIFY_ERROR(21,"微信支付异步通知金额校验不通过"),
-    ORDER_CANCEL_SUCCESS(22,"订单取消成功"),
-    ORDER_FINISH_SUCCESS(22,"订单完结成功"),
+    WECHAT_MP_ERROR(11,"微信公众账号方面错误"),
+    WXPAY_NOTIFY_MONEY_VERIFY_ERROR(22,"微信支付异步通知金额校验不通过"),
+    ORDER_CANCEL_SUCCESS(33,"订单取消成功"),
+    ORDER_FINISH_SUCCESS(44,"订单完结成功"),
+    PRODUCT_STATUS_ERROR(55,"商品状态不正确");
     ;
 
     private Integer code;
