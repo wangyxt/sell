@@ -12,9 +12,7 @@ import com.wangyx.sell.enums.ResultEnum;
 import com.wangyx.sell.exceptions.SellException;
 import com.wangyx.sell.repository.OrderDetailRepository;
 import com.wangyx.sell.repository.OrderMasterRepository;
-import com.wangyx.sell.service.OrderService;
-import com.wangyx.sell.service.PayService;
-import com.wangyx.sell.service.ProductService;
+import com.wangyx.sell.service.*;
 import com.wangyx.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.criterion.Order;
@@ -53,6 +51,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private PayService payService;
+
+    @Autowired
+    private PushMessageService pushMessageService;
+
+    @Autowired
+    private WebSocket webSocket;
     
     @Override
     @Transactional(rollbackOn = Exception.class)
@@ -91,6 +95,9 @@ public class OrderServiceImpl implements OrderService {
                 new CartDTO(e.getProductId(),e.getProductQuantity())
         ).collect(Collectors.toList());
         productService.decreaseSotck(cartDTOList);
+
+        //发送websocket消息
+        webSocket.sendMessage(orderDTO.getOrderId());
         return orderDTO;
     }
 
@@ -168,6 +175,9 @@ public class OrderServiceImpl implements OrderService {
             log.error("【完结订单】 更新失败，orderMaster={}",orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
+
+        //推送微信模板消息
+        pushMessageService.orderStatus(orderDTO);
         return orderDTO;
     }
 

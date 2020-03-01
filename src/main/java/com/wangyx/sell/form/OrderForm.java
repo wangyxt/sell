@@ -25,13 +25,13 @@ public class OrderForm {
     private String address;
 
     /**
-     * 买家openid
+     * 买家微信openid
      */
-//    @NotEmpty(message = "openid必填")
+    @NotEmpty(message = "openid必填")
     private String openid;
 
     /**
-     * 买家购物车
+     * 购物车
      */
     @NotEmpty(message = "购物车不能为空")
     private String items;
