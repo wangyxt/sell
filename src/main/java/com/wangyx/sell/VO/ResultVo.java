@@ -3,6 +3,8 @@ package com.wangyx.sell.VO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * http请求返回的最外层对象
  * @Author xxxx
@@ -11,8 +13,9 @@ import lombok.Data;
  */
 @Data
 //@JsonInclude(JsonInclude.Include.NON_NULL)
-public class ResultVo<T> {
+public class ResultVo<T> implements Serializable {
 
+    private static final long serialVersionUID = -8357744984443663570L;
     /**错误码*/
     private Integer code;
     /** 提示信息 */

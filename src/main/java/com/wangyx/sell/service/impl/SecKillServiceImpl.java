@@ -1,8 +1,11 @@
 package com.wangyx.sell.service.impl;
 
 import com.wangyx.sell.exceptions.SellException;
+import com.wangyx.sell.service.RedisLock;
 import com.wangyx.sell.service.SecKillService;
 import com.wangyx.sell.utils.KeyUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -13,7 +16,13 @@ import java.util.Map;
  * 2017-08-06 23:18
  */
 @Service
+@Slf4j
 public class SecKillServiceImpl implements SecKillService {
+
+    @Autowired
+    private RedisLock redisLock;
+
+    private static final int TIMEOUT = 10 * 1000;//超时时间
 
     /**
      * 国庆活动，皮蛋粥特价，限量100000份
@@ -49,8 +58,14 @@ public class SecKillServiceImpl implements SecKillService {
     }
 
     @Override
-    public synchronized void orderProductMockDiffUser(String productId)
+    public void orderProductMockDiffUser(String productId)
     {
+        //加锁
+        long time = System.currentTimeMillis() + TIMEOUT;
+        if (!redisLock.lock(productId, String.valueOf(time))){
+            log.error("哎呦喂，人太多了，刷新一次再试试~~,{}",time);
+            throw new SellException(101,"哎呦喂，人太多了，刷新一次再试试~~");
+        }
         //1.查询该商品库存，为0则活动结束。
         int stockNum = stock.get(productId);
         if(stockNum == 0) {
@@ -67,5 +82,7 @@ public class SecKillServiceImpl implements SecKillService {
             }
             stock.put(productId,stockNum);
         }
+        //解锁
+        redisLock.unlock(productId,String.valueOf(time));
     }
 }

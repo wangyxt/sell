@@ -7,6 +7,7 @@ import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
@@ -15,7 +16,8 @@ import java.util.Objects;
 @Table(name = "product_info", schema = "sell")
 @DynamicUpdate
 @Data
-public class ProductInfoEntity {
+public class ProductInfoEntity implements Serializable {
+    private static final long serialVersionUID = 3858870735981220627L;
     @Id
     private String productId;
     private String productName;

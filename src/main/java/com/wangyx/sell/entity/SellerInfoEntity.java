@@ -1,12 +1,14 @@
 package com.wangyx.sell.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name = "seller_info", schema = "sell", catalog = "")
-public class SellerInfoEntity {
+public class SellerInfoEntity implements Serializable {
+    private static final long serialVersionUID = 7228517288517763624L;
     private String sellerId;
     private String username;
     private String password;

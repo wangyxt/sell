@@ -5,6 +5,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
@@ -13,8 +14,9 @@ import java.util.Objects;
 @DynamicUpdate
 @Data
 @Table(name = "product_category", schema = "sell")
-public class ProductCategoryEntity {
+public class ProductCategoryEntity implements Serializable {
 
+    private static final long serialVersionUID = 676517469725600584L;
     /** 类目id. */
     @Id
     @GeneratedValue

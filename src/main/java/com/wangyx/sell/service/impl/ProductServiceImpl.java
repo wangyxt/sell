@@ -8,6 +8,8 @@ import com.wangyx.sell.exceptions.SellException;
 import com.wangyx.sell.repository.ProductInfoRepository;
 import com.wangyx.sell.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @CacheEvict(cacheNames = "product",key = "123")
     public ProductInfoEntity save(ProductInfoEntity productInfoEntity) {
         return repository.save(productInfoEntity);
     }

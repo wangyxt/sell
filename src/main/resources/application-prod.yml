@@ -1,0 +1,66 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+        url: jdbc:mysql://49.235.198.29/sell?characterEncoding=utf-8&useSSL=false
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl.auto: update
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    open-in-view: true
+  jackson:
+    default-property-inclusion: non_null
+  mail:
+    host: smtp.163.com
+    username: wangyuexing101@163.com
+    password: Aa123456
+    default-encoding: UTF-8
+    #    port: 465
+    #    smtp:
+    #      auth: true
+    #      starttls:
+    #        enable: true
+    #        required: true
+    #      socketFactory:
+    #        port: 465
+    #        class: javax.net.ssl.SSLSocketFactory
+    #        fallback: false
+  redis:
+    host: 192.168.199.120
+    port: 6379
+    password:
+#logging:
+#  pattern:
+##    console: "%d -%msg%n"
+#  file: /var/log/tomcat/sell.log
+#  level: debug
+server:
+  port: 8080
+  context-path: /sell
+
+
+wechat:
+  # 公众账号，授权
+  #  mpAppId: wxd898fcb01713c658
+  #  mpAppSecret: a932a6bb93bc8a229d50c566984e53b6
+  mpAppId: wx4b0594326d23c9e2
+  mpAppSecret: a932a6bb93bc8a229d50c566984e53b6
+  #开放平台，卖家扫码登录用
+  openAppId: wx6ad144e54af67d87
+  openAppSecret: 91a2ff6d38a2bbccfb7e9f9079108e2e
+  #支付/商户号
+  mchId: 1483469312
+  mchKey: 098F6BCD4621D373CADE4E832627B4F6
+  # 发起支付不需要证书，退款需要
+  keyPath: D:/h5.p12
+  notifyUrl: http://wyxsell.natapp1.cc/sell/pay/notify
+  templateId:
+    orderStatus: ozxwPxKgo8tcYIiaWjpdnyrg3OQY
+
+projectUrl:
+  wechatMpAuthorize: http://wyxsell.natapp1.cc
+  wechatOpenAuthorize: http://wyxsell.natapp1.cc
+  sell: http://wyxsell.natapp1.cc
